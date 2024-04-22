@@ -34,5 +34,5 @@
         </div>
     </div>
     <br>
-    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+    <button routerLink="/profile/{{fullName?.value}}" class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
 </form>
