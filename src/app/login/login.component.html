@@ -1,0 +1,38 @@
+<form (ngSubmit) ="onSubmit()" [formGroup]="form">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" type="text" id="name" name="name" formControlName="fullName" required>
+        <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)" class="text-danger">
+            <div *ngIf="fullName?.errors?.['required']">Nama Wajib Diisi</div>
+            <div *ngIf="fullName?.errors?.['minlength']"> 3 Minimal diisi</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Gender</label>
+        <select class="form-control" id="gender" name="gender" formControlName="gender" required>
+            <option *ngFor="let option of genders" [value]="option">{{option}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password : </label>
+        <input class="form-control" type="text" id="password" formControlName="password" id="password" name="password" required>
+        <div *ngIf="Password?.invalid && (Password?.dirty || Password?.touched)" class="text-danger">
+            <div *ngIf="!Password?.value?.match('^(?=.*[A-Z])')"> At least one uppercase</div> 
+            <div *ngIf="!Password?.value?.match('(?=.*[a-z])')">At least one LowerCase</div> 
+            <div *ngIf="!Password?.value?.match('(.*[0-9].*)')">At least one digit number</div> 
+            <div *ngIf="!Password?.value?.match('(?=.*[!@#$%^&*])')">At least one special Char</div> 
+            <div *ngIf="!Password?.value?.match('.{8,}')">At least 8 character</div> 
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email">Email : </label>
+        <input type="email" id="email"  name="email" class="form-control" formControlName="email"  required>
+        <div *ngIf="Email?.invalid && (Email?.dirty || Email?.touched)" class="text-danger">
+            <div *ngIf="Email?.errors?.['email']">Email Wajib Diisi dengan benar</div> 
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
+</form>
